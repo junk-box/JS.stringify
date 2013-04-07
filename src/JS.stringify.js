@@ -23,7 +23,9 @@
 		"border-bottom-left-radius: 3px" + imp +
 		"border-bottom-right-radius: 3px" + imp;
 	divRowtrl.innerHTML = "" +
-		"<input type='text' " +
+		"<input " +
+			"type='text' " +
+			"spellcheck='false' " +
 			"style='" +
 				"display: inline" + imp +
 				"outline: none" + imp +
