@@ -1,28 +1,32 @@
 /*
- * JS.stringify.js
+ * JS.stringify v1.2
  * http://junk-box.appspot.com/bookmarklet/JS.stringify/index.html
+ *
  * Copyright (C) 2013 S.Ishigaki
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ *
+ * Date: 2013-4-15
  */
 (function() {
 	var imp = " !important;"
-	var divRowtrl = document.createElement("div");
-	divRowtrl.id = "JS.stringify_control";
-	divRowtrl.style.cssText = "" +
+	var divRowCtrl = document.createElement("div");
+	divRowCtrl.id = "JS.stringify_control";
+	divRowCtrl.style.cssText = "" +
 		"position: fixed" + imp +
 		"top: 0px" + imp +
 		"right: 3px" + imp +
 		"z-index: 2147483647" + imp +
 		"padding: 3px" + imp +
 		"padding-top: 1px" + imp +
+		"white-space: nowrap" + imp +
 		"background-color: #dfdfdf" + imp +
 		"border: solid 1px #aaaaab" + imp +
 		"border-top-width: 0px" + imp +
 		"border-top-left-radius: 0px" + imp +
 		"border-top-right-radius: 0px" + imp +
-		"border-bottom-left-radius: 3px" + imp +
-		"border-bottom-right-radius: 3px" + imp;
-	divRowtrl.innerHTML = "" +
+		"border-bottom-left-radius: 4px" + imp +
+		"border-bottom-right-radius: 4px" + imp;
+	divRowCtrl.innerHTML = "" +
 		"<input " +
 			"type='text' " +
 			"spellcheck='false' " +
@@ -315,5 +319,11 @@
 				"document.body.removeChild(document.getElementById(\"JS.stringify_control\"));" +
 			"})()'" +
 		">&times;</a>";
-	document.body.appendChild(divRowtrl);
+	if (document.body.localName == "frameset") {
+		var getDoc = function(f) {
+			if (f.localName == "frame") return f.contentDocument;
+			return arguments.callee(f.children[f.cols.split(",").length - 1]);
+		};
+		getDoc(document.body).body.appendChild(divRowCtrl);
+	} else document.body.appendChild(divRowCtrl);
 })();
