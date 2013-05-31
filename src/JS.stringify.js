@@ -1,12 +1,12 @@
 /*
- * JS.stringify v1.3
+ * JS.stringify v1.4
  * http://junk-box.appspot.com/bookmarklet/JS.stringify/index.html
  *
  * Copyright (C) 2013 S.Ishigaki
  * Licensed under the MIT license
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2013-5-12
+ * Date: 2013-5-31
  */
 (function() {
 
@@ -35,10 +35,18 @@ var
 
 	count,
 
+	stringEscape = function(s) {
+		return s
+			.replace(/\\/g, "\\\\")
+			.replace(/\"/g, "\\\"")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;");
+	},
+
 	_stringify = function(obj, depth, indent, fn) {
 		count++;
 		var ot = typeof(obj);
-		if (ot != "object" && ot != "function") return ot == "string" ? "\"" + obj + "\"" : obj;
+		if (ot != "object" && ot != "function") return ot == "string" ? "\"" + stringEscape(obj) + "\"" : obj;
 		if (depth == indent) return "{...}";
 		var t, v, json = [], arr = (obj && obj.constructor == Array);
 		for (var n in obj) {
@@ -50,10 +58,10 @@ var
 					var f = String(v);
 					v = f.substring(0, f.indexOf(")") + 1) + " {...}";
 				}
-				else if (t == "string") v = "\"" + v.replace(/\\/g, "\\\\").replace(/\"/g, "\\\"") + "\"";
+				else if (t == "string") v = "\"" + stringEscape(v) + "\"";
 				else if (t == "object" &&  v != null) v = arguments.callee(v, depth, indent + 1, fn);
 				else v = String(v);
-				json.push((arr ? "" : "\"" + n + "\": ") + v);
+				json.push((arr ? "" : "\"" + stringEscape(n) + "\": ") + v);
 				if (count > 1000) throw new Error("too big object.");
 			}
 		}
@@ -63,7 +71,14 @@ var
 	stringify = function() {
 		try {
 			count = 0;
-			return "<div><span>" + _stringify(eval(input.value), isNaN(depth.innerHTML) ? 1000 : Number(depth.innerHTML), 0, fn.style.color == "rgb(82, 82, 82)") + "</span></div>";
+			var o = (function() {
+				var props = input.value.split(".");
+				if (window[props[0]] == undefined) return eval(input.value);
+				return (function(obj, index) {
+					return props.length == index ? obj : arguments.callee(obj[props[index]], index + 1);
+				})(window[props[0]], 1);
+			})();
+			return "<div><span>" + _stringify(o, isNaN(depth.innerHTML) ? 1000 : Number(depth.innerHTML), 0, fn.style.color == "rgb(82, 82, 82)") + "</span></div>";
 		} catch (ex) {
 			return ex.message;
 		}
