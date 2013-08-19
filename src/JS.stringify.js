@@ -1,12 +1,12 @@
 /*
- * JS.stringify v1.4
+ * JS.stringify v1.5
  * http://junk-box.appspot.com/bookmarklet/JS.stringify/index.html
  *
  * Copyright (C) 2013 S.Ishigaki
  * Licensed under the MIT license
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2013-5-31
+ * Date: 2013-8-20
  */
 (function() {
 
@@ -71,14 +71,16 @@ var
 	stringify = function() {
 		try {
 			count = 0;
-			var o = (function() {
-				var props = input.value.split(".");
-				if (window[props[0]] == undefined) return eval(input.value);
-				return (function(obj, index) {
-					return props.length == index ? obj : arguments.callee(obj[props[index]], index + 1);
-				})(window[props[0]], 1);
+			var obj = (function() {
+				var o, props = input.value.split(".");
+				try {
+					o = (function(obj, index) {
+						return props.length == index ? obj : arguments.callee(obj[props[index]], index + 1);
+					})(window[props[0]], 1);
+				} catch(_ex) {}
+				return o == undefined ? eval(input.value) : o;
 			})();
-			return "<div><span>" + _stringify(o, isNaN(depth.innerHTML) ? 1000 : Number(depth.innerHTML), 0, fn.style.color == "rgb(82, 82, 82)") + "</span></div>";
+			return "<div><span>" + _stringify(obj, isNaN(depth.innerHTML) ? 1000 : Number(depth.innerHTML), 0, fn.style.color == "rgb(82, 82, 82)") + "</span></div>";
 		} catch (ex) {
 			return ex.message;
 		}
