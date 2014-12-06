@@ -1,12 +1,12 @@
 /*
- * JS.stringify v1.6
+ * JS.stringify v1.7
  * http://junk-box.appspot.com/bookmarklet/JS.stringify/index.html
  *
- * Copyright (C) 2013 S.Ishigaki
+ * Copyright (C) 2014 S.Ishigaki
  * Licensed under the MIT license
  * http://www.opensource.org/licenses/mit-license.php
  *
- * Date: 2013-10-29
+ * Date: 2014-12-06
  */
 (function() {
 
@@ -92,6 +92,7 @@ var
 	},
 
 	show = function() {
+		if (input.value == "") return;
 		if (view) body.removeChild(view);
 		var select = document.createElement("a");
 		select.style.cssText = toCssText([
@@ -224,7 +225,7 @@ var
 			"border-bottom-left-radius: 0px",
 			"border-top-right-radius: 0px",
 			"border-bottom-right-radius: 0px",
-			"padding: 1px 6px 2px 6px",
+			"padding: 0px 6px 2px 6px",
 			"text-decoration: none",
 			"background-color: #eeeeef",
 			"color: rgb(82, 82, 82)",
@@ -254,7 +255,7 @@ var
 			"border-bottom-left-radius: 0px",
 			"border-top-right-radius: 0px",
 			"border-bottom-right-radius: 0px",
-			"padding: 3px 5px 1px 5px",
+			"padding: 1px 5px 2px 5px",
 			"text-decoration: none",
 			"background-color: #eeeeef",
 			"color: rgb(82, 82, 82)",
@@ -281,7 +282,7 @@ var
 					"border-bottom-left-radius: 0px",
 					"border-top-right-radius: 0px",
 					"border-bottom-right-radius: 0px",
-					"padding: 3px 5px 1px 5px",
+					"padding: 1px 5px 2px 5px",
 					"text-decoration: none",
 					"background-color: #eeeeef",
 					"color: rgb(82, 82, 82)",
@@ -304,7 +305,7 @@ var
 					"border-bottom-left-radius: 0px",
 					"border-top-right-radius: 0px",
 					"border-bottom-right-radius: 0px",
-					"padding: 5px 8px 3px 8px",
+					"padding: 4px 8px 3px 8px",
 					"text-decoration: none",
 					"background-color: #eeeeef",
 					"color: rgb(82, 82, 82)",
@@ -335,7 +336,7 @@ var
 			"border-bottom-left-radius: 0px",
 			"border-top-right-radius: 0px",
 			"border-bottom-right-radius: 0px",
-			"padding: 5px 5px 2px 6px",
+			"padding: 3px 5px 3px 6px",
 			"text-decoration: none",
 			"background-color: #eeeeef",
 			"color: rgb(82, 82, 82)",
@@ -359,7 +360,7 @@ var
 				"border-bottom-left-radius: 0px",
 				"border-top-right-radius: 0px",
 				"border-bottom-right-radius: 0px",
-				"padding: 5px 5px 2px 6px",
+				"padding: 3px 5px 3px 6px",
 				"text-decoration: none",
 				"background-color: #eeeeef",
 				"color: " + (status ? "rgb(66, 129, 235)" : "rgb(82, 82, 82)"),
@@ -388,7 +389,7 @@ var
 			"border-bottom-left-radius: 0px",
 			"border-top-right-radius: 3px",
 			"border-bottom-right-radius: 3px",
-			"padding: 3px 8px 2px 7px",
+			"padding: 2px 8px 2px 7px",
 			"text-decoration: none",
 			"background-color: #eeeeef",
 			"color: #525252",
