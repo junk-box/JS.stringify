@@ -1,4 +1,4 @@
-[JS.stringify](http://junk-box.appspot.com/bookmarklet/JS.stringify/index.html)
+[JS.stringify](https://junk-box.github.io/JS.stringify/index.html)
 =====================================================================
 
 これは？
@@ -11,14 +11,14 @@ javascript開発時にオブジェクトの中身を表示したい場合に便�
 ------------
 
 次のページに進み、ブックマークを登録します。
-[JS.stringify](http://junk-box.appspot.com/bookmarklet/JS.stringify/bookmarklet.html)
+[JS.stringify](http://junk-box.github.io/JS.stringify/bookmarklet.html)
 
 使用方法
 --------
 
 ブックマークレットを起動すると右上にオブジェクト入力エリアが表示されます。
 
-<img src="http://junk-box.appspot.com/bookmarklet/JS.stringify/img/description.png">
+<img src="http://junk-box.github.io/JS.stringify/img/description.png">
 
 「input」に表示したいオブジェクトを入力します。
 Enterキーまたは、「watch」を押下すると入力したオブジェクトの内容が表示されます。
